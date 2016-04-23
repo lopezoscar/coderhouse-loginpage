@@ -33,7 +33,8 @@ app.use(express.static("public"));
 
 app.use(function(req,res,next){
 
-    if(req.path == "/login"){
+    //Public routes
+    if(req.path == "/login" || req.path == "/signup"){
         return next();
     }
 
@@ -62,6 +63,7 @@ app.get("/signup",function(req,res,next){
 app.post("/signup",function(req,res,next){
     var user = req.body;
 
+    user.password = utils.encrypt(user.password);
     User.registerUser(user,function(err,persistedUser){
         if(err){
             debug(err);
@@ -99,7 +101,7 @@ app.post("/login",function(req,res,next){
     });
 });
 
-app.post("/logout",function(req,res,next){
+app.get("/logout",function(req,res,next){
     req.session.destroy(function(){
         res.redirect("/login");
     });
@@ -134,6 +136,9 @@ app.post("/saveUser",function(req,res,next){
     });
 });
 
+app.get("/",function(req,res,next){
+    res.render("home.hbs",{});
+});
 
 app.listen(3000,function(){
     console.log("server up");
