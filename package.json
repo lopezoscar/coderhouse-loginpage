@@ -1,0 +1,25 @@
+{
+  "name": "coderhouse-loginpage",
+  "version": "1.0.0",
+  "description": "profilepage",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lopezoscar/coderhouse-loginpage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lopezoscar/coderhouse-loginpage/issues"
+  },
+  "homepage": "https://github.com/lopezoscar/coderhouse-loginpage#readme",
+  "dependencies": {
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
+    "express-handlebars": "^3.0.0",
+    "mongojs": "^2.3.0"
+  }
+}
