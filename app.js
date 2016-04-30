@@ -11,6 +11,8 @@ const mongojs = require("mongojs");
 
 const User = require("./lib/User");
 
+const config = require("config");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -21,7 +23,7 @@ const MongoStore = require('connect-mongo')(session);
 app.use(session({
     secret: 'anitalavalatina',
     store: new MongoStore({
-        url: 'mongodb://localhost:27017/sessions',
+        url: 'mongodb://'+config.get("mongodb.stringconn")+'/sessions',
         ttl: 14 * 24 * 60 * 60 // 14 dias
     })
 }));
@@ -140,6 +142,6 @@ app.get("/",function(req,res,next){
     res.render("home.hbs",{});
 });
 
-app.listen(3000,function(){
+app.listen(config.get("server.port"),function(){
     console.log("server up");
 });

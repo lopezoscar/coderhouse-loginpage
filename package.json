@@ -18,6 +18,7 @@
   "homepage": "https://github.com/lopezoscar/coderhouse-loginpage#readme",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "config": "^1.20.1",
     "debug": "^2.2.0",
     "express": "^4.13.4",
     "express-handlebars": "^3.0.0",
