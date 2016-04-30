@@ -18,14 +18,25 @@ app.use(bodyParser.json());
 
 const session = require('express-session');
 
-const MongoStore = require('connect-mongo')(session);
+//const MongoStore = require('connect-mongo')(session);
+const RedisStore = require('connect-redis')(session);
 
+/**
 app.use(session({
     secret: 'anitalavalatina',
     store: new MongoStore({
         url: 'mongodb://'+config.get("mongodb.stringconn")+'/sessions',
         ttl: 14 * 24 * 60 * 60 // 14 dias
     })
+}));
+ */
+
+app.use(session({
+    store: new RedisStore({
+        url: 'redis://'+config.get("redis.stringconn")+'',
+        ttl: 14 * 24 * 60 * 60 // 14 dias
+    }),
+    secret: 'anitalavalatina'
 }));
 
 app.engine('hbs', exphbs({defaultLayout:'layout.hbs'}));
@@ -142,6 +153,7 @@ app.get("/",function(req,res,next){
     res.render("home.hbs",{});
 });
 
+
 app.listen(config.get("server.port"),function(){
-    console.log("server up");
+    console.log("server up SERVER PORT ",Number(config.get("server.port")));
 });
